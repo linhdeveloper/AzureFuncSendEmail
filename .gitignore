@@ -5,3 +5,5 @@
 /.vs
 /AzureFunctionSendEmail/Properties
 *.gitignore
+/AzureFunctionSendEmail/bin
+/AzureFunctionSendEmail/obj
