@@ -8,9 +8,10 @@ using MailKit.Net.Smtp;
 using Microsoft.Azure.Functions.Worker;
 using MailKit;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AzureFunctionSendEmail
-{
+{    
     public class SendEmail
     {
         private readonly ILogger<SendEmail> _logger;
@@ -22,9 +23,11 @@ namespace AzureFunctionSendEmail
             _mailService = mailService;
         }
 
-        [Function("SendEmail")]
+        
+        [Function("SendEmail")]        
         public IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req
+            //[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req
             //[SendGrid(ApiKey = "SendGridApiKey")] out SendGridMessage message
             )
         {
