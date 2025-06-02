@@ -47,7 +47,7 @@ namespace AzureFunctionSendEmail
 
             _logger.LogInformation(LogMessage("4.End function"));
 
-            return new OkObjectResult("Email request submitted.");
+            return new OkObjectResult("Email request submitted(V2).");
         }
 
         private string LogMessage(string message)
