@@ -26,6 +26,7 @@ namespace AzureFunctionSendEmail
         }
 
         
+
         [Function("SendEmail")]        
         public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req
@@ -35,46 +36,6 @@ namespace AzureFunctionSendEmail
         {
 
             _logger.LogInformation($"Timer function executed at: {DateTime.Now}");
-
-            #region DATABASE CONNECTION
-
-            // Get connection string from Azure App Settings
-            string connectionString = Environment.GetEnvironmentVariable("SqlConnectionString");
-
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                return new BadRequestObjectResult("SQL connection string is not configured.");
-            }
-
-            string queryResult;
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    var command = new SqlCommand("SELECT TOP 1 Name FROM Users", conn);
-                    var reader = command.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        queryResult = reader.GetString(0);
-                    }
-                    else
-                    {
-                        queryResult = "No data found.";
-                    }
-                }
-
-                return new OkObjectResult($"Top user: {queryResult}");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Database error: {ex.Message}");
-                return new StatusCodeResult(500);
-            }
-
-            #endregion
 
             #region SEND EMAIL
 
@@ -97,11 +58,8 @@ namespace AzureFunctionSendEmail
 
             #endregion
 
-
-
-
         }
-
+        
         private string LogMessage(string message)
         {
             var prefix = "***********************>>> ";
