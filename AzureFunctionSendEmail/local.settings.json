@@ -1,0 +1,7 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "SqlConnectionString": "Server=localhost;Database=AuthenticationDB;Integrated Security=True;Trusted_Connection=Yes;Encrypt=True;TrustServerCertificate=True;",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
+  }
+}

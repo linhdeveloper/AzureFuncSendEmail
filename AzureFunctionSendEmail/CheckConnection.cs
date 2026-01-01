@@ -48,7 +48,7 @@ namespace AzureFunctionSendEmail
                 {
                     conn.Open();
 
-                    var command = new SqlCommand("SELECT TOP 1 Name FROM Users", conn);
+                    var command = new SqlCommand("SELECT TOP 1 email FROM  AspnetUsers", conn);
                     var reader = command.ExecuteReader();
 
                     if (reader.Read())
